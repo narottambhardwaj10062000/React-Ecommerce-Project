@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import { GlobalStyle } from "./GlobalStyle"; 
 import { ThemeProvider } from "styled-components";
 import Header from "./Components/Header";
+import About from "./Pages/About";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
       <Header />
       <Routes>
         <Route path = "/" element = {<Home />} />
+        <Route path = "/about" element = {<About /> } />
       </Routes>
     </BrowserRouter>
     </ThemeProvider>
