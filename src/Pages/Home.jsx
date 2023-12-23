@@ -10,14 +10,17 @@ const Home = () => {
 };
 
 const Wrapper = styled.section`
-  background-color : ${({ theme }) => (theme.colors.bg)};
+  background-color : black;
   height : 100vh;
   width : 100%;
+  display : flex;
+  align-items : center;
 
   .test{
     color : blue;
     background-color : yellow;
   }
+
 `;
 
 
