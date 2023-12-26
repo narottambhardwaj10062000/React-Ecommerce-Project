@@ -5,6 +5,7 @@ import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./Components/Header";
 import About from "./Pages/About";
+import Footer from "./Components/Footer";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path = "/" element = {<Home />} />
         <Route path = "/about" element = {<About /> } />
       </Routes>
+      <Footer />
     </BrowserRouter>
     </ThemeProvider>
   )
