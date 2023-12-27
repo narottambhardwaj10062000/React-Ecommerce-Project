@@ -65,7 +65,7 @@ const Footer = () => {
                 </div>
             </div>
 
-             {/* Bottom Footer*/}
+            {/* Bottom Footer*/}
             <div className='footer-bottom--section'>
                 <hr />
                 <div className='container grid grid-two-column'>
@@ -78,9 +78,6 @@ const Footer = () => {
                 </div>
             </div>
         </footer> 
-
-       
-
     </Wrapper>
   )
 }
