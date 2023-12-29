@@ -3,12 +3,15 @@ import HeroComponent from '../Components/HeroComponent'
 
 const About = () => {
 
-    const data = {
-        name : "Gada Store",
-    }
+
+  const data = {
+      name : "Gada Store",
+  }
 
   return (
-    <HeroComponent myData = {data}/>
+    <>
+      <HeroComponent myData = {data}/>{" "}
+    </>
   )
 }
 
