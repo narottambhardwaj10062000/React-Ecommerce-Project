@@ -7,7 +7,7 @@ const Product = (currElem) => {
   const { id, name, image, price, category } = currElem;
 
   return (
-    <NavLink>
+    <NavLink to={`/singleProduct/${id}`}>
         <div className='card'>
             <figure>
                 <img src={image} alt={name} />

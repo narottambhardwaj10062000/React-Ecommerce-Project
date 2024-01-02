@@ -9,6 +9,7 @@ import Footer from "./Components/Footer";
 import Contact from "./Pages/Contact";
 import ErrorPage from "./Pages/ErrorPage";
 import { ProductContextProvider } from "./contexts/ProductContext";
+import  SingleProduct from "./Pages/SingleProduct";
 
 function App() {
   const theme = {
@@ -42,6 +43,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<ErrorPage />} />
+            <Route path="/singleProduct/:id" element={<SingleProduct />} />
           </Routes>
           <Footer />
         </BrowserRouter>
