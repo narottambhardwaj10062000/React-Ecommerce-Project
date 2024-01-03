@@ -10,6 +10,8 @@ import Contact from "./Pages/Contact";
 import ErrorPage from "./Pages/ErrorPage";
 import { ProductContextProvider } from "./contexts/ProductContext";
 import  SingleProduct from "./Pages/SingleProduct";
+import { FilterProductContextProvider } from "./contexts/FilterProductContext";
+import Products from "./Pages/Products";
 
 function App() {
   const theme = {
@@ -34,6 +36,7 @@ function App() {
 
   return (
     <ProductContextProvider>
+      <FilterProductContextProvider>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <GlobalStyle />
@@ -42,12 +45,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/products" element={<Products />} />
             <Route path="*" element={<ErrorPage />} />
             <Route path="/singleProduct/:id" element={<SingleProduct />} />
           </Routes>
           <Footer />
         </BrowserRouter>
       </ThemeProvider>
+      </FilterProductContextProvider>
     </ProductContextProvider>
   );
 }
