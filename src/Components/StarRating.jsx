@@ -1,34 +1,33 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 import { AiOutlineStar } from "react-icons/ai";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 const StarRating = ({ stars, reviews }) => {
+  const ratingStar = Array.from({ length: 5 }, (elem, index) => {
+    let number = index + 0.5;
 
-    const ratingStar = Array.from({ length: 5 }, (elem, index) => {
-        let number = index + 0.5;
-
-        return(
-            <span key={index}>
-                {stars >= index + 1 ? (
-                    <FaStar className="icon" />
-                ) : stars >= number ? (
-                    <FaStarHalfAlt className="icon" />
-                ) : (
-                    <AiOutlineStar className="icon" />
-                )}
-            </span>
-        );
-    });
+    return (
+      <span key={index}>
+        {stars >= index + 1 ? (
+          <FaStar className="icon" />
+        ) : stars >= number ? (
+          <FaStarHalfAlt className="icon" />
+        ) : (
+          <AiOutlineStar className="icon" />
+        )}
+      </span>
+    );
+  });
 
   return (
     <Wrapper>
-       <div className='icon-style'>
-          {ratingStar}
-          <p>({ reviews } customer reviews)</p>
-       </div>
+      <div className="icon-style">
+        {ratingStar}
+        <p>({reviews} customer reviews)</p>
+      </div>
     </Wrapper>
-  )
+  );
 };
 
 const Wrapper = styled.div`
@@ -51,6 +50,6 @@ const Wrapper = styled.div`
       padding-left: 1.2rem;
     }
   }
-`
+`;
 
-export default StarRating
+export default StarRating;
