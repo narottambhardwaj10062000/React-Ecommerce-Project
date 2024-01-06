@@ -8,6 +8,7 @@ const initialState = {
   filterProducts: [],
   allProducts: [],
   gridView: true,
+  sortingValue: "a-z",
 };
 
 const FilterProductContextProvider = ({ children }) => {
@@ -23,15 +24,23 @@ const FilterProductContextProvider = ({ children }) => {
     dispatch({ type: "SET_LIST_VIEW" });
   };
 
+  const sorting = () => {
+    dispatch({ type: "GET_SORT_VALUE" });
+  }
+
   useEffect(
     () => dispatch({ type: "SET_FILTER_PRODUCT_DATA", payload: products }),
     [products]
   );
 
+  useEffect(() => {
+    dispatch({ type: "SORTING_PRODUCTS", payload: products });
+  }, [state.sortingValue]);
+
   // console.log(state.allProducts);
 
   return (
-    <FilterProductContext.Provider value={{ ...state, setGridView, setListView }} >
+    <FilterProductContext.Provider value={{ ...state, setGridView, setListView, sorting }} >
       {children}
     </FilterProductContext.Provider>
   );
