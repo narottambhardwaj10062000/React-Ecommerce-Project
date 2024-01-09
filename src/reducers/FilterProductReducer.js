@@ -21,43 +21,42 @@ const FilterProductReducer = (state, action) => {
 
     case "GET_SORT_VALUE":
 
-      let userSortValue = document.getElementById("sort"); 
-      let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
+      // let userSortValue = document.getElementById("sort"); 
+      // let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
       // console.log(sort_value);
 
       return {
         ...state,
-        sortingValue: sort_value,
+        sortingValue: action.payload,
       }
 
     case  "SORTING_PRODUCTS":
 
       let newSortData;
-      let tempSortData = [...action.payload];
+      const { filterProducts } = state;
+      let tempSortData = [...filterProducts];
+      const { sortingValue } = state;
 
-      if (state.sortingValue === "a-z") {
-        newSortData = tempSortData.sort((a, b) => {
+
+      const comparator = (a, b) => {
+        if( sortingValue === "a-z" ) {
           return a.name.localeCompare(b.name);
-        });
-      }
+        }
 
-      if (state.sortingValue === "z-a") {
-        newSortData = tempSortData.sort((a, b) => {
+        if( sortingValue === "z-a" ) {
           return b.name.localeCompare(a.name);
-        });
-      }
+        }
 
-      if (state.sortingValue === "lowest") {
-        newSortData = tempSortData.sort((a, b) => {
+        if( sortingValue === "lowest" ) {
           return a.price - b.price;
-        });
+        }
+
+        if( sortingValue === "highest" ) {
+          return b.price - a.price;
+        }
       }
 
-      if (state.sortingValue === "highest") {
-        newSortData = tempSortData.sort((a, b) => {
-          return b.price - a.price;
-        });
-      }
+      newSortData = tempSortData.sort(comparator);
 
      return {
        ...state,
@@ -67,8 +66,7 @@ const FilterProductReducer = (state, action) => {
 
     default:
       return state;
-
-
+      
   }
 };
 

@@ -24,8 +24,9 @@ const FilterProductContextProvider = ({ children }) => {
     dispatch({ type: "SET_LIST_VIEW" });
   };
 
-  const sorting = () => {
-    dispatch({ type: "GET_SORT_VALUE" });
+  const sorting = (e) => {
+    const userSelectedValue = e.target.value;
+    dispatch({ type: "GET_SORT_VALUE" , payload: userSelectedValue });
   }
 
   useEffect(
@@ -34,7 +35,7 @@ const FilterProductContextProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    dispatch({ type: "SORTING_PRODUCTS", payload: products });
+    dispatch({ type: "SORTING_PRODUCTS"});
   }, [state.sortingValue]);
 
   // console.log(state.allProducts);
