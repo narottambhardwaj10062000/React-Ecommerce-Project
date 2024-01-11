@@ -1,29 +1,86 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../contexts/FilterProductContext";
 
 const FilterSection = () => {
+  const {
+    filters: { text, category },
+    updateFilterValue,
+    allProducts,
+  } = useFilterContext();
 
-  const { filters: { text }, updateFilterValue } = useFilterContext();
-  console.log(text);
+  const getUniqueData = (data, filterName) => {
+    let allUniqueData = data.map((currElem) => {
+      return currElem[filterName];
+    });
+
+    return (allUniqueData = ["All", ...new Set(allUniqueData)]);
+  };
+
+  const allUniqueCategories = getUniqueData(allProducts, "category");
+  const allUniqueCompanies = getUniqueData(allProducts, "company");
+  // console.log(allUniqueCompanies);
+  // console.log(category);
 
   return (
     <Wrapper>
+      {/* SEARCH FUNCTIONALITY */}
       <div className="filter-search">
-        <form onSubmit={(e) => e.preventDefault()} >
+        <form onSubmit={(e) => e.preventDefault()}>
           <input
-           type='text'
-           name='text'
-           value={text}
-           placeholder='Search...' 
-           onChange={ updateFilterValue }
+            type="text"
+            name="text"
+            value={text}
+            placeholder="Search..."
+            onChange={ updateFilterValue }
           />
         </form>
       </div>
 
+      {/* CATEGORY WISE FILTER */}
+      <div className="filter-category">
+        <h3>Category</h3>
+        <div>
+          {allUniqueCategories.map((currElem, index) => {
+            return (
+              <button key={index}
+               type="button" 
+               name="category"
+               value={ currElem }
+               onClick={ updateFilterValue }
+              >
+                {currElem}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* COMPANY WISE FILTER */}
+      <div className="filter-company">
+          <h3>Companies</h3>
+          <div>
+            {
+              allUniqueCompanies.map((currElem, index) => {
+                return (
+                  <button 
+                    key={ index }
+                    type="button"
+                    name="company"
+                    value={ currElem }
+                    onClick={ updateFilterValue }
+
+                  >
+                    { currElem }
+                  </button>
+                );
+              })
+            }
+          </div>
+      </div>
     </Wrapper>
-  )
-}
+  );
+};
 const Wrapper = styled.section`
   padding: 5rem 0;
   display: flex;
@@ -129,7 +186,6 @@ const Wrapper = styled.section`
     background-color: #ec7063;
     color: #000;
   }
-  
-`
+`;
 
-export default FilterSection
+export default FilterSection;

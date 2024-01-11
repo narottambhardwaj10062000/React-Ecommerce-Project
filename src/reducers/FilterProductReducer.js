@@ -1,5 +1,10 @@
 const FilterProductReducer = (state, action) => {
+
+  let { allProducts } = state;
+
   switch (action.type) {
+
+
     case "SET_FILTER_PRODUCT_DATA":
       return {
         ...state,
@@ -20,10 +25,6 @@ const FilterProductReducer = (state, action) => {
       };
 
     case "GET_SORT_VALUE":
-      // let userSortValue = document.getElementById("sort");
-      // let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
-      // console.log(sort_value);
-
       return {
         ...state,
         sortingValue: action.payload,
@@ -65,15 +66,33 @@ const FilterProductReducer = (state, action) => {
       return {
         ...state,
         filters: {
+          ...state.filters,
           [name]: value,
         },
       };
+
     case "UPDATE_FILTER_PRODUCT_VALUE":
-      const { filters: {text}, allProducts } = state;
-      let tempAllProducts = [...allProducts];
-      let newFilterProductsValue = tempAllProducts.filter((currElem) => {
-        return currElem.name.toLowerCase().includes(text);
-      });
+      // const { allProducts } = state;
+      const { text, category, company } = state.filters;
+      let newFilterProductsValue = [ ...allProducts ];
+
+      if(text) {
+        newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
+          return currElem.name.toLowerCase().includes(text);
+        });
+      }
+
+      if(category){
+        newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
+          return currElem.category === category;
+        });
+      }
+
+      // if(company) {
+      //   newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
+      //     return currElem.company === company;
+      //   });
+      // }
 
       return {
         ...state,
