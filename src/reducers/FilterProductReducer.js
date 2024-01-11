@@ -20,53 +20,68 @@ const FilterProductReducer = (state, action) => {
       };
 
     case "GET_SORT_VALUE":
-
-      // let userSortValue = document.getElementById("sort"); 
+      // let userSortValue = document.getElementById("sort");
       // let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
       // console.log(sort_value);
 
       return {
         ...state,
         sortingValue: action.payload,
-      }
+      };
 
-    case  "SORTING_PRODUCTS":
-
+    case "SORTING_PRODUCTS":
       let newSortData;
       const { filterProducts } = state;
       let tempSortData = [...filterProducts];
       const { sortingValue } = state;
 
-
       const comparator = (a, b) => {
-        if( sortingValue === "a-z" ) {
+        if (sortingValue === "a-z") {
           return a.name.localeCompare(b.name);
         }
 
-        if( sortingValue === "z-a" ) {
+        if (sortingValue === "z-a") {
           return b.name.localeCompare(a.name);
         }
 
-        if( sortingValue === "lowest" ) {
+        if (sortingValue === "lowest") {
           return a.price - b.price;
         }
 
-        if( sortingValue === "highest" ) {
+        if (sortingValue === "highest") {
           return b.price - a.price;
         }
-      }
+      };
 
       newSortData = tempSortData.sort(comparator);
 
-     return {
-       ...state,
-       filterProducts: newSortData,
-     }
+      return {
+        ...state,
+        filterProducts: newSortData,
+      };
 
+    case "UPDATE_FILTERS_VALUE":
+      const { name, value } = action.payload;
+      return {
+        ...state,
+        filters: {
+          [name]: value,
+        },
+      };
+    case "UPDATE_FILTER_PRODUCT_VALUE":
+      const { filters: {text}, allProducts } = state;
+      let tempAllProducts = [...allProducts];
+      let newFilterProductsValue = tempAllProducts.filter((currElem) => {
+        return currElem.name.toLowerCase().includes(text);
+      });
+
+      return {
+        ...state,
+        filterProducts: newFilterProductsValue,
+      };
 
     default:
       return state;
-      
   }
 };
 
