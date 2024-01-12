@@ -3,10 +3,23 @@ const FilterProductReducer = (state, action) => {
 
   switch (action.type) {
     case "SET_FILTER_PRODUCT_DATA":
+
+      let priceArray = action.payload.map((currElem) => {
+        return currElem.price;
+      })
+
+      let maximum = Math.max(...priceArray);
+
+
       return {
         ...state,
         filterProducts: [...action.payload],
         allProducts: [...action.payload],
+        filters: {
+          ...state.filters,
+          maxPrice: maximum,
+          price: maximum,
+        }
       };
 
     case "SET_GRID_VIEW":
@@ -70,7 +83,7 @@ const FilterProductReducer = (state, action) => {
 
     case "UPDATE_FILTER_PRODUCT_VALUE":
       // const { allProducts } = state;
-      const { text, category, company, color } = state.filters;
+      const { text, category, company, color, price } = state.filters;
       let newFilterProductsValue = [...allProducts];
 
       if (text) {
@@ -95,6 +108,19 @@ const FilterProductReducer = (state, action) => {
         newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
           return currElem.colors.includes(color);
         });
+      }
+
+      if(price) {
+        if(price === 0){
+          newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
+            return currElem.price === price;
+          })
+        }
+        else{
+          newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
+            return currElem.price <= price;
+          })
+        }
       }
 
       return {

@@ -14,6 +14,9 @@ const initialState = {
     category: "All",
     company: "All",
     color: "All",
+    maxPrice: 0,
+    minPrice: 0,
+    price: 0,
   }
 };
 
@@ -49,6 +52,8 @@ const FilterProductContextProvider = ({ children }) => {
     () => dispatch({ type: "SET_FILTER_PRODUCT_DATA", payload: products }),
     [products]
   );
+
+  console.log(state.price);
 
   useEffect(() => {
     dispatch({ type: "SORTING_PRODUCTS"});

@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../contexts/FilterProductContext";
 import { FaCheck } from "react-icons/fa";
+import FormatPrice from "../Helpers/FormatPrice";
 
 const FilterSection = () => {
   const {
-    filters: { text, category, color },
+    filters: { text, category, color, maxPrice, price, minPrice },
     updateFilterValue,
     allProducts,
   } = useFilterContext();
@@ -25,9 +26,11 @@ const FilterSection = () => {
   const allUniqueCategories = getUniqueData(allProducts, "category");
   const allUniqueCompanies = getUniqueData(allProducts, "company");
   const allUniqueColors = getUniqueData(allProducts, "colors");
-  console.log(allUniqueColors);
+  // console.log(allUniqueColors);
   // console.log(allUniqueCompanies);
   // console.log(category);
+  // console.log(price);
+  // console.log(maxPrice);
 
   return (
     <Wrapper>
@@ -123,6 +126,22 @@ const FilterSection = () => {
             );
           })}
         </div>
+      </div>
+
+      {/* PRICE WISE FILTER */}
+      <div className="filter_price">
+          <h3>Price</h3>
+          <p>
+            <FormatPrice price={price} />
+          </p>
+          <input
+            type="range"
+            min={minPrice}
+            max={maxPrice}
+            name="price"
+            value={price}
+            onChange={ updateFilterValue }
+          />
       </div>
     </Wrapper>
   );
