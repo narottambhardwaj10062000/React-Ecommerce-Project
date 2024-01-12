@@ -1,10 +1,7 @@
 const FilterProductReducer = (state, action) => {
-
   let { allProducts } = state;
 
   switch (action.type) {
-
-
     case "SET_FILTER_PRODUCT_DATA":
       return {
         ...state,
@@ -73,24 +70,30 @@ const FilterProductReducer = (state, action) => {
 
     case "UPDATE_FILTER_PRODUCT_VALUE":
       // const { allProducts } = state;
-      const { text, category, company } = state.filters;
-      let newFilterProductsValue = [ ...allProducts ];
+      const { text, category, company, color } = state.filters;
+      let newFilterProductsValue = [...allProducts];
 
-      if(text) {
+      if (text) {
         newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
           return currElem.name.toLowerCase().includes(text);
         });
       }
 
-      if(category !== "All"){
+      if (category !== "All") {
         newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
           return currElem.category === category;
         });
       }
 
-      if(company !== "All") {
+      if (company !== "All") {
         newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
           return currElem.company === company;
+        });
+      }
+
+      if (color !== "All") {
+        newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
+          return currElem.colors.includes(color);
         });
       }
 

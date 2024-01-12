@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../contexts/FilterProductContext";
+import { FaCheck } from "react-icons/fa";
 
 const FilterSection = () => {
   const {
-    filters: { text, category },
+    filters: { text, category, color },
     updateFilterValue,
     allProducts,
   } = useFilterContext();
@@ -14,11 +15,17 @@ const FilterSection = () => {
       return currElem[filterName];
     });
 
+    if (filterName === "colors") {
+      return (allUniqueData = ["All", ...new Set([].concat(...allUniqueData))]);
+    }
+
     return (allUniqueData = ["All", ...new Set(allUniqueData)]);
   };
 
   const allUniqueCategories = getUniqueData(allProducts, "category");
   const allUniqueCompanies = getUniqueData(allProducts, "company");
+  const allUniqueColors = getUniqueData(allProducts, "colors");
+  console.log(allUniqueColors);
   // console.log(allUniqueCompanies);
   // console.log(category);
 
@@ -61,21 +68,65 @@ const FilterSection = () => {
       <div className="filter-company">
         <h3>Companies</h3>
         <form action="#">
-          <select className="filter-company--select" name="company" id="company" onClick={updateFilterValue} >
-            {
-              allUniqueCompanies.map((currElem, index) => {
-                return (
-                  <option key={index} value={currElem} name="company">{currElem}</option>
-                )
-              })
-            }
+          <select
+            className="filter-company--select"
+            name="company"
+            id="company"
+            onClick={updateFilterValue}
+          >
+            {allUniqueCompanies.map((currElem, index) => {
+              return (
+                <option key={index} value={currElem} name="company">
+                  {currElem}
+                </option>
+              );
+            })}
           </select>
         </form>
+      </div>
+
+      {/* COLOR WISE FILTER */}
+      <div className="filter-color colors">
+        <h3>colors</h3>
+
+        <div className="filter-color-style">
+          {allUniqueColors.map((currColor, index) => {
+
+            if( currColor === "All"){
+              return (
+              <button
+                type="button"
+                name="color"
+                key={index}
+                className="color-all--style"
+                value={ currColor }
+                onClick={ updateFilterValue }
+
+              >
+                All
+              </button>
+              )
+            }
+            return (
+              <button
+                type="button"
+                name="color"
+                style={{ backgroundColor: currColor }}
+                key={index}
+                className={color === currColor ? "btnStyle active" : "btnStyle"}
+                value={ currColor }
+                onClick={ updateFilterValue }
+
+              >
+                { color === currColor ? <FaCheck className="checkStyle" /> : null }
+              </button>
+            );
+          })}
+        </div>
       </div>
     </Wrapper>
   );
 };
-
 
 const Wrapper = styled.section`
   padding: 5rem 0;
