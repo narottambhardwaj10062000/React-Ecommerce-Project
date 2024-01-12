@@ -128,6 +128,20 @@ const FilterProductReducer = (state, action) => {
         filterProducts: newFilterProductsValue,
       };
 
+    case "CLEAR_ALL_FILTERS":
+      return {
+        ...state,
+        filters: {
+          text: "",
+          category: "All",
+          company: "All",
+          color: "All",
+          maxPrice: state.filters.maxPrice,
+          minPrice: 0,
+          price: state.filters.maxPrice,
+        }
+      }
+
     default:
       return state;
   }
