@@ -32,7 +32,7 @@ const FilterSection = () => {
             name="text"
             value={text}
             placeholder="Search..."
-            onChange={ updateFilterValue }
+            onChange={updateFilterValue}
           />
         </form>
       </div>
@@ -43,11 +43,12 @@ const FilterSection = () => {
         <div>
           {allUniqueCategories.map((currElem, index) => {
             return (
-              <button key={index}
-               type="button" 
-               name="category"
-               value={ currElem }
-               onClick={ updateFilterValue }
+              <button
+                key={index}
+                type="button"
+                name="category"
+                value={currElem}
+                onClick={updateFilterValue}
               >
                 {currElem}
               </button>
@@ -58,29 +59,24 @@ const FilterSection = () => {
 
       {/* COMPANY WISE FILTER */}
       <div className="filter-company">
-          <h3>Companies</h3>
-          <div>
+        <h3>Companies</h3>
+        <form action="#">
+          <select className="filter-company--select" name="company" id="company" onClick={updateFilterValue} >
             {
               allUniqueCompanies.map((currElem, index) => {
                 return (
-                  <button 
-                    key={ index }
-                    type="button"
-                    name="company"
-                    value={ currElem }
-                    onClick={ updateFilterValue }
-
-                  >
-                    { currElem }
-                  </button>
-                );
+                  <option key={index} value={currElem} name="company">{currElem}</option>
+                )
               })
             }
-          </div>
+          </select>
+        </form>
       </div>
     </Wrapper>
   );
 };
+
+
 const Wrapper = styled.section`
   padding: 5rem 0;
   display: flex;

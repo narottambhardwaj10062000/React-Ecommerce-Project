@@ -82,17 +82,17 @@ const FilterProductReducer = (state, action) => {
         });
       }
 
-      if(category){
+      if(category !== "All"){
         newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
           return currElem.category === category;
         });
       }
 
-      // if(company) {
-      //   newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
-      //     return currElem.company === company;
-      //   });
-      // }
+      if(company !== "All") {
+        newFilterProductsValue = newFilterProductsValue.filter((currElem) => {
+          return currElem.company === company;
+        });
+      }
 
       return {
         ...state,

@@ -44,7 +44,6 @@ const FilterProductContextProvider = ({ children }) => {
   }
 
   // console.log( state.filters.company );
-
   useEffect(
     () => dispatch({ type: "SET_FILTER_PRODUCT_DATA", payload: products }),
     [products]
